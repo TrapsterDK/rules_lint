@@ -46,6 +46,17 @@ def ty_action(ctx, executable, srcs, transitive_srcs, config, stdout, exit_code 
     inputs = depset(srcs + config, transitive = [transitive_srcs])
     outputs = [stdout]
 
+    stub_paths = []
+    normal_paths = []
+
+    for p in extra_search_paths:
+        if "_types_" in p or "_stubs" in p:
+            stub_paths.append(p)
+        else:
+            normal_paths.append(p)
+
+    extra_search_paths = stub_paths + normal_paths
+
     # Wire command-line options, see
     # `ty help check` to see available options
     args = ctx.actions.args()
