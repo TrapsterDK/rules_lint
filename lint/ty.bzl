@@ -80,16 +80,35 @@ def ty_action(ctx, executable, srcs, transitive_srcs, config, stdout, exit_code 
 fi
 """.format(path = path)
 
-    if exit_code:
-        command = """{extra_search_path_script}
-{ty} $@ $EXTRA_SEARCH_PATHS >{stdout}
-echo $? >{exit_code}
+    command = """
+{extra_search_path_script}
+readonly TMP_OUT=$(mktemp)
+
+# Run the tool and hide output
+{ty} $@ $EXTRA_SEARCH_PATHS > "$TMP_OUT" 2>&1
+RET=$?
+
+if [ "$RET" -eq 0 ]; then
+    # SUCCESS: Silence the output completely
+    touch {stdout}
+else
+    # FAILURE: Move errors to the output file
+    cp "$TMP_OUT" {stdout}
+fi
 """
+
+    if exit_code:
         outputs.append(exit_code)
+        command += """
+echo "$RET" > {exit_code}
+exit 0
+"""
     else:
-        # Create empty file on success, as Bazel expects one
-        command = """{extra_search_path_script}
-{ty} $@ $EXTRA_SEARCH_PATHS && touch {stdout}
+        command += """
+if [ "$RET" -ne 0 ]; then
+    cat "$TMP_OUT" >&2
+    exit "$RET"
+fi
 """
 
     ctx.actions.run_shell(
