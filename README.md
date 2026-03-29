@@ -58,7 +58,7 @@ Linters which are not language-specific:
 | Shell                  | [shfmt]                   | [shellcheck]                               |
 | Starlark               | [Buildifier]              | [Buildifier]                               |
 | Swift                  | [SwiftFormat] (1)         |                                            |
-| TOML                   | [taplo]                   |                                            |
+| TOML                   | [taplo]                   | [taplo]                                    |
 | TSX                    | [Prettier]                | [ESLint]                                   |
 | TypeScript             | [Prettier]                | [ESLint]                                   |
 | YAML                   | [yamlfmt]                 | [yamllint]                                 |
