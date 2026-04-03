@@ -83,7 +83,6 @@ func TestSarif(t *testing.T) {
 		g.Expect(sarifJson.Runs[0].Results[0].Locations[0].PhysicalLocation.ArtifactLocation.URI).To(Equal("src/missing_doc_arg.py"))
 		g.Expect(sarifJson.Runs[0].Results[0].Locations[0].PhysicalLocation.Region.GetRdfRange().Start.Line).To(Equal(int32(4)))
 	})
-
 	t.Run("determineRelativePath: returns relative paths untouched", func(t *testing.T) {
 		g := NewGomegaWithT(t)
 
