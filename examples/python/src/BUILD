@@ -20,6 +20,11 @@ py_library(
 )
 
 py_library(
+    name = "missing_doc_arg",
+    srcs = ["missing_doc_arg.py"],
+)
+
+py_library(
     name = "uses_dependency",
     srcs = ["uses_dependency.py"],
     deps = ["//src/python_lib:py_dependency"],
@@ -52,6 +57,7 @@ filegroup(
     name = "all",
     srcs = [
         ":call_non_callable",
+        ":missing_doc_arg",
         ":unsupported_operator",
         ":unused_import",
         ":uses_dependency",
