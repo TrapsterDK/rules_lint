@@ -29,7 +29,7 @@ TOOLS = {
     "C": "clang-format",
     "C++": "clang-format",
     "Cuda": "clang-format",
-    "YAML": "yamlfmt",
+    "YAML": "prettier",
     "Rust": "rustfmt",
     "Ruby": "stree",
     "XML": "prettier",
@@ -47,7 +47,6 @@ BUILTIN_TOOL_LABELS = {
     "Go": "@multitool//tools/gofumpt",
     "Shell": "@multitool//tools/shfmt",
     "Terraform": "@multitool//tools/terraform",
-    "YAML": "@multitool//tools/yamlfmt",
     "Python": "@multitool//tools/ruff",
 }
 
@@ -70,7 +69,6 @@ CHECK_FLAGS = {
     "jsonnetfmt": "--test",
     "scalafmt": "--test --respect-project-filters",
     "clang-format": "--style=file --fallback-style=none --dry-run -Werror",
-    "yamlfmt": "-lint",
     "rustfmt": "--check",
     "stree": "check",
     "fantomas": "--check",
@@ -105,7 +103,6 @@ FIX_FLAGS = {
     # https://github.com/scalameta/scalafmt/pull/2020
     "scalafmt": "--respect-project-filters",
     "clang-format": "-style=file --fallback-style=none -i",
-    "yamlfmt": "",
     "rustfmt": "",
     "stree": "write",
     "fantomas": "",
