@@ -328,23 +328,6 @@ function run-format {
           # Setting JAVA_RUNFILES to work around https://github.com/bazelbuild/bazel/issues/12348
           ( export JAVA_RUNFILES="${RUNFILES_DIR}" ; time-run "$files" "$bin" "$lang" 0 $args )
         ;;
-      Nix)
-        # nixfmt only accepts one file at a time and has no formatting check mode.
-        while IFS= read -r file; do
-          if [[ "${mode:-}" == "check" ]]; then
-            formatted=$(mktemp)
-            "$bin" $args < "$file" > "$formatted"
-            if ! cmp -s "$file" "$formatted"; then
-              echo "Nix file not formatted: $file" >&2
-              rm "$formatted"
-              exit 1
-            fi
-            rm "$formatted"
-          else
-            "$bin" $args "$file"
-          fi
-        done <<< "$files"
-        ;;
       Swift)
         # for any formatter that must be silenced
         time-run "$files" "$bin" "$lang" 1 $args

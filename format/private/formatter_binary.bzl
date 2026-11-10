@@ -76,7 +76,7 @@ CHECK_FLAGS = {
     "csharpier": "check",
     "pkl": "format --silent",
     "modfmt": "-c",
-    "nixfmt": "-",
+    "nixfmt": "--check",
 }
 
 # Flags to pass each tool when running in default mode

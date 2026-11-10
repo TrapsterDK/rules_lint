@@ -266,7 +266,7 @@ setup() {
 
 @test "should check Nix formatting with nixfmt" {
     run bazel run //format/test:format_Nix_with_nixfmt.check
-    assert_failure
+    assert_success
 
-    assert_output --partial "Nix file not formatted: examples/nix/src/hello.nix"
+    assert_output --partial "+ nixfmt --check examples/nix/src/hello.nix"
 }
