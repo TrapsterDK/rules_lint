@@ -157,7 +157,7 @@ Linters which are not language-specific:
 | QML                | [qmlformat]               | [qmllint]                                               |
 | Ruby               | [Syntax Tree][stree]       | [RuboCop], [StandardRB][standard]                       |
 | Rust               | [rustfmt]                 | [clippy]                                                |
-| SQL                | [prettier-plugin-sql]     | [SQLFluff]                                              |
+| SQL                | [prettier-plugin-sql] or [SQLFluff] | [SQLFluff]                                            |
 | Scala              | [scalafmt]                | [scalafix]                                              |
 | Shell              | [shfmt]                   | [shellcheck]                                            |
 | Starlark           | [Buildifier]              | [Buildifier]                                            |
