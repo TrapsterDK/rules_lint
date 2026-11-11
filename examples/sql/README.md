@@ -9,6 +9,7 @@ The lint integration requires SQLFluff 4.3.0 or newer.
 ### Formatters
 
 - **Prettier** - SQL formatter (via Prettier SQL plugin)
+- **SQLFluff** - opt-in SQL formatter (`//tools/format:format_sqlfluff`)
 
 ### Linters
 
@@ -21,8 +22,8 @@ The lint integration requires SQLFluff 4.3.0 or newer.
 3. Set up npm dependencies (run `pnpm install` to generate `pnpm-lock.yaml`)
 4. Configure the tools
 
-- See `tools/format/BUILD` for the Prettier formatter
-- See `tools/lint/BUILD` for the SQLFluff binary
+- See `tools/format/BUILD` for the Prettier and SQLFluff formatters
+- See `tools/lint/BUILD` for the shared SQLFluff binary
 - See `tools/lint/linters.bzl` for how to set up the linter
 - See `.aspect/config.axl` for `aspect lint` registration
 - See `.bazelrc` for direct `bazel build --config=lint` registration
