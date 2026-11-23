@@ -233,6 +233,23 @@ report_test(
     report = "machine_ruff_pyi_report",
 )
 
+ty_test(
+    name = "ty_should_resolve_own_generated_pyi_srcs",
+    srcs = ["//src:uses_generated_stub"],
+)
+
+ruff_test(
+    name = "ruff_should_lint_pyi_srcs",
+    srcs = ["//src:undefined_name_pyi_srcs"],
+    expected_exit_code = 1,
+)
+
+flake8_test(
+    name = "flake8_should_lint_pyi_srcs",
+    srcs = ["//src:undefined_name_pyi_srcs"],
+    expected_exit_code = 1,
+)
+
 machine_ty_report(
     name = "machine_ty_report",
     src = "//src:unsupported_operator",

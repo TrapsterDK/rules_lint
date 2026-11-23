@@ -1,3 +1,4 @@
+load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load("@rules_python//python:defs.bzl", "py_library")
 
 package(default_visibility = ["//visibility:public"])
@@ -77,6 +78,26 @@ py_library(
     name = "uses_generated_dependency_correctly",
     srcs = ["uses_generated_dependency_correctly.py"],
     deps = ["//:generated_dependency"],
+)
+
+# A generated stub for a module with no Python source, such as a native extension.
+write_file(
+    name = "generated_native_stub",
+    out = "generated_native.pyi",
+    content = ["def greet(name: str) -> str: ..."],
+)
+
+py_library(
+    name = "uses_generated_stub",
+    srcs = ["uses_generated_stub.py"],
+    pyi_srcs = [":generated_native_stub"],
+)
+
+# A stub declared in rules_python's dedicated `pyi_srcs` attribute rather than `srcs`.
+# It names an undefined type, which Ruff and Flake8 both report.
+py_library(
+    name = "undefined_name_pyi_srcs",
+    pyi_srcs = ["undefined_name.pyi"],
 )
 
 filegroup(
