@@ -93,8 +93,22 @@ py_library(
     pyi_srcs = [":generated_native_stub"],
 )
 
+# A generated stub under the target's own `imports` root, imported by its top-level name.
+write_file(
+    name = "own_imports_native_stub",
+    out = "stubs/own_imports_native.pyi",
+    content = ["def greet(name: str) -> str: ..."],
+)
+
+py_library(
+    name = "uses_own_imports_stub",
+    srcs = ["uses_own_imports_stub.py"],
+    imports = ["stubs"],
+    pyi_srcs = [":own_imports_native_stub"],
+)
+
 # A stub declared in rules_python's dedicated `pyi_srcs` attribute rather than `srcs`.
-# It names an undefined type, which Ruff and Flake8 both report.
+# It names an undefined type, which Ruff reports.
 py_library(
     name = "undefined_name_pyi_srcs",
     pyi_srcs = ["undefined_name.pyi"],

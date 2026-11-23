@@ -26,7 +26,7 @@ flake8 = lint_flake8_aspect(
 ```
 """
 
-load("//lint/private:lint_aspect.bzl", "LintOptionsInfo", "OPTIONAL_SARIF_PARSER_TOOLCHAIN", "OUTFILE_FORMAT", "PYTHON_SOURCE_ATTRIBUTES", "filter_srcs", "noop_lint_action", "output_files", "parse_to_sarif_action", "should_visit")
+load("//lint/private:lint_aspect.bzl", "LintOptionsInfo", "OPTIONAL_SARIF_PARSER_TOOLCHAIN", "OUTFILE_FORMAT", "filter_srcs", "noop_lint_action", "output_files", "parse_to_sarif_action", "should_visit")
 
 _MNEMONIC = "AspectRulesLintFlake8"
 
@@ -80,7 +80,7 @@ def _flake8_aspect_impl(target, ctx):
 
     outputs, info = output_files(_MNEMONIC, target, ctx)
 
-    files_to_lint = filter_srcs(ctx.rule, PYTHON_SOURCE_ATTRIBUTES)
+    files_to_lint = filter_srcs(ctx.rule)
 
     if len(files_to_lint) == 0:
         noop_lint_action(ctx, outputs)

@@ -238,14 +238,13 @@ ty_test(
     srcs = ["//src:uses_generated_stub"],
 )
 
-ruff_test(
-    name = "ruff_should_lint_pyi_srcs",
-    srcs = ["//src:undefined_name_pyi_srcs"],
-    expected_exit_code = 1,
+ty_test(
+    name = "ty_should_resolve_own_imports",
+    srcs = ["//src:uses_own_imports_stub"],
 )
 
-flake8_test(
-    name = "flake8_should_lint_pyi_srcs",
+ruff_test(
+    name = "ruff_should_lint_pyi_srcs",
     srcs = ["//src:undefined_name_pyi_srcs"],
     expected_exit_code = 1,
 )

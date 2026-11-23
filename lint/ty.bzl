@@ -211,6 +211,12 @@ def _ty_aspect_impl(target, ctx):
                         import_paths[dep.label.workspace_root] = True
                         import_paths[ctx.bin_dir.path + "/" + dep.label.workspace_root] = True
 
+    # The target's own `imports` roots, so its sources resolve its own stubs too.
+    if PyInfo in target:
+        for import_path in target[PyInfo].imports.to_list():
+            for e in _resolve_import_path(import_path, ctx.workspace_name, ctx.bin_dir.path):
+                import_paths[e] = True
+
     files_to_lint = filter_srcs(ctx.rule, PYTHON_SOURCE_ATTRIBUTES)
     outputs, info = output_files(_MNEMONIC, target, ctx)
 
